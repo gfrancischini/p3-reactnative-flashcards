@@ -1,23 +1,58 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+import { white, purple } from './utils/colors'
+
+import DeckList from './components/DeckList'
+import DeckDetail from './components/DeckDetail'
+import Quiz from './components/Quiz'
+import { TabNavigator, StackNavigator } from 'react-navigation'
+import {saveDefault} from './services/CardsAsyncStorage'
+
+const WrappedDeck = ({ navigation }) => {
+    return <DeckList navigation={navigation} decks={[{ title: "bla bla bla1" }, { title: "bla bla bla2" }, { title: "bla bla bla3" }]} />
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const MainNavigator = StackNavigator({
+    Home: {
+        screen: DeckList,
+        navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple,
+            }
+        }
+    },
+    DeckDetail: {
+        screen: DeckDetail,
+    },
+    Quiz: {
+        screen: Quiz
+    }
+
+})
+
+const store = createStore(
+    reducer
+  );
+
+export default class App extends React.Component {
+
+    constructor() {
+        super();
+        saveDefault();
+    }
+
+    render() {
+        return (
+            <Provider store={store}>
+                <View style={{ flex: 1 }}>
+                    <MainNavigator />
+                </View>
+            </Provider>
+        )
+    }
+}
