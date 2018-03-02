@@ -28,14 +28,28 @@ export class DeckList extends React.Component {
         )
     }
 
+    onPressAddDeck = () => {
+        this.props.navigation.navigate(
+            'AddDeck'
+        );
+    }
+
     render() {
         console.log(JSON.stringify(this.props));
 
 
         return (
+            <View>
             <FlatList data={this.props.decks}
                 renderItem={this.renderItem}
                 keyExtractor={(item, index) => item.title} />
+
+            
+            
+                <TouchableOpacity onPress={this.onPressAddDeck}>
+                <Text>Add Deck</Text>
+            </TouchableOpacity>
+            </View>
         )
     }
 }

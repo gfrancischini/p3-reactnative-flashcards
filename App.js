@@ -10,7 +10,10 @@ import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
 import Quiz from './components/Quiz'
 import { TabNavigator, StackNavigator } from 'react-navigation'
-import {saveDefault} from './services/CardsAsyncStorage'
+import { saveDefault } from './services/CardsAsyncStorage'
+
+import AddDeck from './components/AddDeck'
+import AddQuestion from './components/AddQuestion'
 
 const WrappedDeck = ({ navigation }) => {
     return <DeckList navigation={navigation} decks={[{ title: "bla bla bla1" }, { title: "bla bla bla2" }, { title: "bla bla bla3" }]} />
@@ -31,13 +34,19 @@ const MainNavigator = StackNavigator({
     },
     Quiz: {
         screen: Quiz
+    },
+    AddDeck: {
+        screen: AddDeck
+    },
+    AddQuestion: {
+        screen: AddQuestion
     }
 
 })
 
 const store = createStore(
     reducer
-  );
+);
 
 export default class App extends React.Component {
 
@@ -45,6 +54,8 @@ export default class App extends React.Component {
         super();
         saveDefault();
     }
+
+  
 
     render() {
         return (

@@ -15,8 +15,8 @@ export class DeckDetail extends React.Component {
                 <Text>{this.props.deck.questions.length}</Text>
                 <TouchableOpacity
                     onPress={() => this.props.navigation.navigate(
-                        'EntryDetail',
-                        { entryId: key }
+                        'AddQuestion',
+                        { id: this.props.deck.id }
                     )}>
                     <Text>Add Card</Text>
                 </TouchableOpacity>
