@@ -14,6 +14,7 @@ export class AddDeck extends React.Component {
         const newDeck = {
             id: this.state.title, //todo this should be a unique guid
             title: this.state.title,
+            questions: []
         }
 
         console.log("onPressAddDeck: " + JSON.stringify(newDeck));
