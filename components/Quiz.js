@@ -8,7 +8,6 @@ export class Quiz extends React.Component {
 
    
     render() {
-        console.log(JSON.stringify(this.props));
         return (
             <View>
                 <Card card={this.props.deck.questions[0]}/>

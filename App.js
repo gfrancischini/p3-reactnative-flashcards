@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { createStore } from 'redux'
+import { createStore, applyMiddleware  } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import { white, purple } from './utils/colors'
@@ -10,10 +10,11 @@ import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
 import Quiz from './components/Quiz'
 import { TabNavigator, StackNavigator } from 'react-navigation'
-import { saveDefault } from './services/CardsAsyncStorage'
 
 import AddDeck from './components/AddDeck'
 import AddQuestion from './components/AddQuestion'
+
+import thunk from 'redux-thunk';    
 
 const WrappedDeck = ({ navigation }) => {
     return <DeckList navigation={navigation} decks={[{ title: "bla bla bla1" }, { title: "bla bla bla2" }, { title: "bla bla bla3" }]} />
@@ -45,18 +46,11 @@ const MainNavigator = StackNavigator({
 })
 
 const store = createStore(
-    reducer
+    reducer,
+    applyMiddleware(thunk)
 );
 
 export default class App extends React.Component {
-
-    constructor() {
-        super();
-        saveDefault();
-    }
-
-  
-
     render() {
         return (
             <Provider store={store}>

@@ -32,7 +32,7 @@ const INITIAL_STATE = {
  * 
  */
 const deckReducer = (state = INITIAL_STATE, action) => {
-    console.log("deckReducer");
+    console.log("deckReducer: " + JSON.stringify(action));
     switch (action.type) {
         case "RECEIVE_DECKS":
             const itemsById = action.decks

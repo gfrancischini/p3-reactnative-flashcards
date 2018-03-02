@@ -17,7 +17,6 @@ export default class Card extends React.Component {
 
     render() {
         const { question } = this.props.card;
-        console.log(JSON.stringify(this.props));
         return (
             <View>
                 <Text>{question}</Text>

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput } from 'react-native';
 import Card from './Card'
 import { connect } from 'react-redux'
-import { selectDeckById } from '../selectors'
+import { addDeck } from '../actions'
 
 export class AddDeck extends React.Component {
     constructor(props) {
@@ -10,8 +10,20 @@ export class AddDeck extends React.Component {
         this.state = { title: null };
     }
 
+    onPressAddDeck = () => {
+        const newDeck = {
+            id: this.state.title, //todo this should be a unique guid
+            title: this.state.title,
+        }
+
+        console.log("onPressAddDeck: " + JSON.stringify(newDeck));
+
+        this.props.saveDeck(newDeck);
+        this.props.goBack();
+ 
+    }
+
     render() {
-        console.log(JSON.stringify(this.props));
         return (
             <View>
                 <Text> ahsjahs </Text>
@@ -21,20 +33,28 @@ export class AddDeck extends React.Component {
                     onChangeText={(title) => this.setState({ title })}
                     value={this.state.title}
                 />
+
+                <TouchableOpacity onPress={this.onPressAddDeck}>
+                    <Text>Save Deck</Text>
+                </TouchableOpacity>
             </View>
         )
     }
 }
 
-
-function mapStateToProps(state, { navigation }) {
-    //const { id } = navigation.state.params
-
+function mapStateToProps(state) {
     return {
-        //deck: selectDeckById(state, id)
+    }
+}
+
+function mapDispatchToProps(dispatch, {navigation}) {
+    return {
+        saveDeck: (deck) => addDeck(deck)(dispatch),
+        goBack: () => navigation.goBack(),
     }
 }
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(AddDeck)

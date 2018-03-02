@@ -13,13 +13,13 @@ export const receiveDecks = decks => ({
  * 
  */
 export const addDeck = (newDeck) => dispatch => (
-    dispatch(receiveDecks([deck]))
+    dispatch(receiveDecks([newDeck]))
 )
 
 /**
  * 
  */
-export const updateDeck = (newDeck) => dispatch => (
-    dispatch(receiveDecks([deck]))
+export const updateDeck = (updatedDeck) => dispatch => (
+    dispatch(receiveDecks([updatedDeck]))
 )
 

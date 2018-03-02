@@ -3,15 +3,31 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput } from 'r
 import Card from './Card'
 import { connect } from 'react-redux'
 import {selectDeckById} from '../selectors'
+import { updateDeck } from '../actions'
 
 export class AddQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = { question: null, answer:null };
     }
+
+    onPressAddQuestion = () => {
+        const deck = {...this.props.deck};
+        const newQuestion = {
+            question: this.state.question,
+            answer: this.state.answer,
+        }
+
+        deck.questions.push(newQuestion);
+
+        console.log("onPressAddQuestion: " + JSON.stringify(deck));
+
+        this.props.saveDeck(deck);
+        this.props.goBack();
+ 
+    }
    
     render() {
-        console.log(JSON.stringify(this.props));
         return (
             <View>
                 <Text> Add Card to {this.props.deck.title} </Text>
@@ -27,6 +43,10 @@ export class AddQuestion extends React.Component {
                     onChangeText={(answer) => this.setState({ answer })}
                     value={this.state.answer}
                 />
+                <TouchableOpacity
+                    onPress={this.onPressAddQuestion}>
+                    <Text>Add Question</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -41,6 +61,14 @@ function mapStateToProps(state, { navigation }) {
     }
 }
 
+function mapDispatchToProps(dispatch, {navigation}) {
+    return {
+        saveDeck: (deck) => updateDeck(deck)(dispatch),
+        goBack: () => navigation.goBack(),
+    }
+}
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(AddQuestion)

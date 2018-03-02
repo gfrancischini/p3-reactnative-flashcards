@@ -8,7 +8,6 @@ export class DeckDetail extends React.Component {
     
     render() {
         //const {title} = this.props.deck;
-        console.log("DeckDetail: " + JSON.stringify(this.props));
         return (
             <View>
                 <Text>{this.props.deck.title}</Text>
