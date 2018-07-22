@@ -9,6 +9,7 @@ import { white, purple } from './utils/colors'
 import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
 import Quiz from './components/Quiz'
+import QuizResult from './components/QuizResult'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 
 import AddDeck from './components/AddDeck'
@@ -16,9 +17,6 @@ import AddQuestion from './components/AddQuestion'
 
 import thunk from 'redux-thunk';    
 
-const WrappedDeck = ({ navigation }) => {
-    return <DeckList navigation={navigation} decks={[{ title: "bla bla bla1" }, { title: "bla bla bla2" }, { title: "bla bla bla3" }]} />
-}
 
 const MainNavigator = StackNavigator({
     Home: {
@@ -27,20 +25,66 @@ const MainNavigator = StackNavigator({
             headerTintColor: white,
             headerStyle: {
                 backgroundColor: purple,
-            }
-        }
+                
+            },
+            title: 'Cards are Awesome'
+        },
+        
     },
     DeckDetail: {
         screen: DeckDetail,
+        navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple,
+                
+            },
+            title: 'Quiz Detail'
+        },
     },
     Quiz: {
-        screen: Quiz
+        screen: Quiz,
+        navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple,
+                
+            },
+            title: 'Playing Quiz'
+        },
+    },
+    QuizResult: {
+        screen: QuizResult,
+        navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple,
+                
+            },
+            title: 'Quiz Result'
+        },
     },
     AddDeck: {
-        screen: AddDeck
+        screen: AddDeck,
+        navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple,
+                
+            },
+            title: 'Add a new Deck Quiz'
+        },
     },
     AddQuestion: {
-        screen: AddQuestion
+        screen: AddQuestion,
+        navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple,
+                
+            },
+            title: 'Add Question to Quiz'
+        },
     }
 
 })

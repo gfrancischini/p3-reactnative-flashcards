@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
     itemsById: {
-        React: {
-            id: 'React',
+        1: {
+            id: 1,
             title: 'React',
             questions: [
                 {
@@ -14,8 +14,8 @@ const INITIAL_STATE = {
                 }
             ]
         },
-        JavaScript: {
-            id: 'JavaScript',
+        2: {
+            id: 2,
             title: 'JavaScript',
             questions: [
                 {
@@ -32,7 +32,7 @@ const INITIAL_STATE = {
  * 
  */
 const deckReducer = (state = INITIAL_STATE, action) => {
-    console.log("deckReducer: " + JSON.stringify(action));
+    //console.log("deckReducer: " + JSON.stringify(action));
     switch (action.type) {
         case "RECEIVE_DECKS":
             const itemsById = action.decks

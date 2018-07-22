@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native
 import Deck from './Deck'
 import { connect } from 'react-redux'
 import { selectDecks } from '../selectors'
+import {StyledButton} from "./basic/Button"
 
 export class DeckList extends React.Component {
 
@@ -35,16 +36,11 @@ export class DeckList extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={{flex:1}}>
                 <FlatList data={this.props.decks}
                     renderItem={this.renderItem}
                     keyExtractor={(item, index) => item.title} />
-
-
-
-                <TouchableOpacity onPress={this.onPressAddDeck}>
-                    <Text>Add Deck</Text>
-                </TouchableOpacity>
+                <StyledButton title="Add New Deck" color="green" onPress={this.onPressAddDeck}/>
             </View>
         )
     }

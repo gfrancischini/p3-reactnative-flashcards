@@ -7,15 +7,13 @@ export default class Deck extends React.Component {
         return (
             <View style={styles.container}>
                 <Hero
-
-                    source={{ uri: 'https://udemy-images.udemy.com/course/750x422/1362070_b9a1_2.jpg' }}
-
+                    source={{ uri: `https://picsum.photos/420/320?image=${this.props.deck.id}` }}
                     renderOverlay={() => (
                         <View style={{ flex: 1, padding: 20 }}>
                             <Text style={styles.h1}>{title.toUpperCase()}</Text>
                             <Text style={styles.h2}>{this.props.deck.questions.length} Question(s)</Text>
                         </View>)}
-                    
+
                     colorOpacity={0.5}
                     resizeMode='cover'
                     minHeight={200} />

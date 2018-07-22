@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity, TextInput } from 'r
 import Card from './Card'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
+import { StyledButton } from "./basic/Button"
 
 export class AddDeck extends React.Component {
     constructor(props) {
@@ -11,23 +12,24 @@ export class AddDeck extends React.Component {
     }
 
     onPressAddDeck = () => {
+        console.log("nextAvailableId: " + this.props.nextAvailableId);
         const newDeck = {
-            id: this.state.title, //todo this should be a unique guid
+            id: this.props.nextAvailableId, //TODO: in a real work this should be a unique guid
             title: this.state.title,
             questions: []
         }
 
-        console.log("onPressAddDeck: " + JSON.stringify(newDeck));
+        //console.log("onPressAddDeck: " + JSON.stringify(newDeck));
 
         this.props.saveDeck(newDeck);
         this.props.goBack();
- 
+
     }
 
     render() {
         return (
-            <View>
-                <Text> ahsjahs </Text>
+            <View style={{ flex: 1, flexGrow: 1, justifyContent: "center" }}>
+                <Text>What is your deck name</Text>
                 <TextInput
                     placeholder="Type your deck name"
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
@@ -35,9 +37,7 @@ export class AddDeck extends React.Component {
                     value={this.state.title}
                 />
 
-                <TouchableOpacity onPress={this.onPressAddDeck}>
-                    <Text>Save Deck</Text>
-                </TouchableOpacity>
+                <StyledButton onPress={this.onPressAddDeck} title="Save Deck" color="green" />
             </View>
         )
     }
@@ -45,10 +45,11 @@ export class AddDeck extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        nextAvailableId: Math.max(...Object.keys(state.itemsById))+1,
     }
 }
 
-function mapDispatchToProps(dispatch, {navigation}) {
+function mapDispatchToProps(dispatch, { navigation }) {
     return {
         saveDeck: (deck) => addDeck(deck)(dispatch),
         goBack: () => navigation.goBack(),

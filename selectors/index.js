@@ -7,6 +7,9 @@ export const selectDeckById = (state, id) => {
     if (state.itemsById == null) {
         return null;
     }
+
+    console.log(state.itemsById[id]);
+
     return state.itemsById[id];
 }
 
